@@ -1,16 +1,19 @@
 package com.ditto.training.marketplaceforcustomer.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.ditto.training.marketplaceforcustomer.DeskripsiProdukActivity;
 import com.ditto.training.marketplaceforcustomer.Model.Product;
 import com.ditto.training.marketplaceforcustomer.R;
 
@@ -45,13 +48,22 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListProductViewHolder holder, final int position) {
         holder.tvNamaProduk.setText(listProductku.get(position).getProductName());
         holder.tvNamaMerchant.setText(listProductku.get(position).getMerchant().getMerchantName());
 
-        /*String baseUrl = "http://210.210.154.65:4444/storage";
+        String baseUrl = "http://210.210.154.65:4444/storage";
         String url = baseUrl+listProductku.get(position).getProductImage();
-        Glide.with(context).load(url).into(holder.ivProduk);*/
+        //Glide.with(context).load(url).into(holder.ivProduk);
+
+        holder.parentProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent deskripsiActivity = new Intent(context, DeskripsiProdukActivity.class);
+                deskripsiActivity.putExtra("produk", listProductku.get(position));
+                context.startActivity(deskripsiActivity);
+            }
+        });
     }
 
     @Override
@@ -62,12 +74,14 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     public class ListProductViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivProduk;
         public TextView tvNamaProduk, tvNamaMerchant;
+        public LinearLayout parentProduk;
 
         public ListProductViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProduk = itemView.findViewById(R.id.iv_product);
             tvNamaProduk = itemView.findViewById(R.id.tv_product_name);
             tvNamaMerchant = itemView.findViewById(R.id.tv_merchant_name);
+            parentProduk = itemView.findViewById(R.id.parent_product);
         }
     }
 }
