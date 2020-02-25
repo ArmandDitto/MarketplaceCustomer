@@ -52,9 +52,14 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
         holder.tvNamaProduk.setText(listProductku.get(position).getProductName());
         holder.tvNamaMerchant.setText(listProductku.get(position).getMerchant().getMerchantName());
 
-        String baseUrl = "http://210.210.154.65:4444/storage";
+        String baseUrl = "http://210.210.154.65:4444/storage/";
         String url = baseUrl+listProductku.get(position).getProductImage();
-        Glide.with(context).load(url).into(holder.ivProduk);
+        if(listProductku.get(position).getProductImage()==null){
+            Glide.with(context).load(baseUrl+"images/products/product_image_300x300.png").into(holder.ivProduk);
+        }
+        else {
+            Glide.with(context).load(url).into(holder.ivProduk);
+        }
 
         holder.parentProduk.setOnClickListener(new View.OnClickListener() {
             @Override
