@@ -54,7 +54,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
         String baseUrl = "http://210.210.154.65:4444/storage";
         String url = baseUrl+listProductku.get(position).getProductImage();
-        //Glide.with(context).load(url).into(holder.ivProduk);
+        Glide.with(context).load(url).into(holder.ivProduk);
 
         holder.parentProduk.setOnClickListener(new View.OnClickListener() {
             @Override
