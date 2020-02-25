@@ -1,15 +1,19 @@
 package com.ditto.training.marketplaceforcustomer.Model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListProduct {
-    private List<Product> listProduct;
+    @SerializedName("data")
+    private ArrayList<Product> listProduct;
 
-    public ListProduct(List<Product> listProduct) {
+    public ListProduct(ArrayList<Product> listProduct) {
         this.listProduct = listProduct;
     }
 
-    public List<Product> getListProduct() {
+    public ArrayList<Product> getListProduct() {
         return listProduct;
     }
 }
