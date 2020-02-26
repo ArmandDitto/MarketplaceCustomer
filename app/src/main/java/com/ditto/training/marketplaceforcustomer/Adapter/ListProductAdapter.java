@@ -51,6 +51,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     public void onBindViewHolder(@NonNull ListProductViewHolder holder, final int position) {
         holder.tvNamaProduk.setText(listProductku.get(position).getProductName());
         holder.tvNamaMerchant.setText(listProductku.get(position).getMerchant().getMerchantName());
+        holder.tvHargaProduk.setText("Rp "+String.valueOf(listProductku.get(position).getProductPrice()));
 
         String baseUrl = "http://210.210.154.65:4444/storage/";
         String url = baseUrl+listProductku.get(position).getProductImage();
@@ -78,7 +79,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
     public class ListProductViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivProduk;
-        public TextView tvNamaProduk, tvNamaMerchant;
+        public TextView tvNamaProduk, tvNamaMerchant, tvHargaProduk;
         public LinearLayout parentProduk;
 
         public ListProductViewHolder(@NonNull View itemView) {
@@ -86,6 +87,7 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
             ivProduk = itemView.findViewById(R.id.iv_product);
             tvNamaProduk = itemView.findViewById(R.id.tv_product_name);
             tvNamaMerchant = itemView.findViewById(R.id.tv_merchant_name);
+            tvHargaProduk = itemView.findViewById(R.id.tv_product_price);
             parentProduk = itemView.findViewById(R.id.parent_product);
         }
     }

@@ -9,15 +9,19 @@ public class Product implements Parcelable {
     private String productSlug;
     private int productQty;
     private String productImage;
+    private int productPrice;
+    private String productDesc;
     private Merchant merchant;
     private Category category;
 
-    public Product(int productId, String productName, String productSlug, int productQty, String productImage, Merchant merchant, Category category) {
+    public Product(int productId, String productName, String productSlug, int productQty, String productImage, int productPrice, String productDesc, Merchant merchant, Category category) {
         this.productId = productId;
         this.productName = productName;
         this.productSlug = productSlug;
         this.productQty = productQty;
         this.productImage = productImage;
+        this.productPrice = productPrice;
+        this.productDesc = productDesc;
         this.merchant = merchant;
         this.category = category;
     }
@@ -42,6 +46,14 @@ public class Product implements Parcelable {
         return productImage;
     }
 
+    public int getProductPrice() {
+        return productPrice;
+    }
+
+    public String getProductDesc() {
+        return productDesc;
+    }
+
     public Merchant getMerchant() {
         return merchant;
     }
@@ -63,6 +75,8 @@ public class Product implements Parcelable {
         dest.writeString(this.productSlug);
         dest.writeInt(this.productQty);
         dest.writeString(this.productImage);
+        dest.writeInt(this.productPrice);
+        dest.writeString(this.productDesc);
         dest.writeParcelable(this.merchant, flags);
         dest.writeParcelable(this.category, flags);
     }
@@ -73,6 +87,8 @@ public class Product implements Parcelable {
         this.productSlug = in.readString();
         this.productQty = in.readInt();
         this.productImage = in.readString();
+        this.productPrice = in.readInt();
+        this.productDesc = in.readString();
         this.merchant = in.readParcelable(Merchant.class.getClassLoader());
         this.category = in.readParcelable(Category.class.getClassLoader());
     }

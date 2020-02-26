@@ -8,8 +8,8 @@
     android:layout_marginBottom="15dp">
     <ImageView
         android:id="@+id/iv_product"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:paddingRight="20dp"
         android:src="@mipmap/ic_launcher"/>
     <LinearLayout
@@ -29,5 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Juju Shop"/>
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp 200000"
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
 </LinearLayout>

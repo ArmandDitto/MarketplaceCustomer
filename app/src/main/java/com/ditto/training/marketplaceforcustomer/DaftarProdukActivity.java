@@ -41,7 +41,7 @@ public class DaftarProdukActivity extends AppCompatActivity {
         listProductAdapter = new ListProductAdapter(DaftarProdukActivity.this, data);
 
         rvProduct.setAdapter(listProductAdapter);
-        rvProduct.setLayoutManager(new GridLayoutManager(DaftarProdukActivity.this, 2));
+        rvProduct.setLayoutManager(new GridLayoutManager(DaftarProdukActivity.this, 1));
 
         VolleyLoad();
     }
