@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
     final String IS_MERCHANT = "is_merchant";
     final String MERCHANT_NAME = "merchant_name";
 
-    int isMerchant = 1;
+    int isMerchant = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         tvLoginActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(getApplicationContext(), DaftarProdukActivity.class);
+                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
             }
         });
@@ -75,9 +75,11 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     parentRegisterMerchant.setVisibility(View.VISIBLE);
+                    isMerchant = 1;
                 }
                 else {
                     parentRegisterMerchant.setVisibility(View.INVISIBLE);
+                    isMerchant = 0;
                 }
             }
         });
@@ -170,14 +172,15 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put(EMAIL, customerEmail);
                 params.put(PASSWORD, customerPassword);
                 params.put(CONPASSWORD, customerConfirmPassword);
-                params.put(IS_MERCHANT, String.valueOf(isMerchant));
-                params.put(MERCHANT_NAME, customerMerchant);
+                if(isMerchant==1){
+                    params.put(IS_MERCHANT, String.valueOf(isMerchant));
+                    params.put(MERCHANT_NAME, customerMerchant);
+                }
                 return params;
-
             }
         };
 
-        requestQueue.add(stringRequest);
+        VolleyService.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     private boolean isValidInput(){
@@ -220,9 +223,11 @@ public class RegisterActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        if(etMerchant.getText().toString().isEmpty()){
-            etMerchant.setError("Merchant Name is Required");
-            isValid = false;
+        if(isMerchant==1){
+            if(etMerchant.getText().toString().isEmpty()){
+                etMerchant.setError("Merchant Name is Required");
+                isValid = false;
+            }
         }
 
         return isValid;
